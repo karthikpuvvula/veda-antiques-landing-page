@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-playfair), serif;
+  --font-sans: var(--font-montserrat), sans-serif;
+  --font-cinzel: var(--font-cinzel), cursive;
+
+  --color-veda-gold: #C5A47E;
+  --color-veda-gold-dark: #A68A67;
+  --color-veda-beige: #F5F3F0;
+  --color-veda-charcoal: #1A1A1A;
+  --color-veda-charcoal-light: #2A2A2A;
+  --color-veda-gray: #888888;
+}
+
+* {
+  /* outline: 1px solid red; */
+}
+
+/* Custom utilities if needed, but Tailwind v4 handles most via theme */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-veda-beige);
+  color: var(--color-veda-charcoal);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel), cursive;
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+.text-gold {
+  color: var(--color-veda-gold);
+}
+
+.bg-gold {
+  background-color: var(--color-veda-gold);
+}
+
+.bg-charcoal {
+  background-color: var(--color-veda-charcoal);
+}
