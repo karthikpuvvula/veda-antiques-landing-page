@@ -20,8 +20,8 @@ const treasures = [
   },
   {
     id: '03',
-    title: 'Dailyware',
-    description: 'Minimalist gold and diamond pieces for everyday grace.',
+    title: 'Fashion Jewelry',
+    description: 'Chic, contemporary pieces designed for effortless daily elegance.',
     image: '/images/dailyware-bracelet.png',
   },
 ];

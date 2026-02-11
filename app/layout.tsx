@@ -23,7 +23,7 @@ const cinzel = Cinzel_Decorative({
 
 export const metadata: Metadata = {
   title: 'Veda Antiques | The Soul of Tradition',
-  description: 'Coming Soon. Hand-selected pieces representing the pinnacle of their era.',
+  description: 'Discover the soul of tradition with Veda Antiques. Explore our curated collection of exquisite antique jewelry, from temple designs to oxidized silver and daily wear.',
 }
 
 export default function RootLayout({

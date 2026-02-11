@@ -1,10 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import Image from 'next/image';
 import { Footer } from './footer';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Popup } from '../ui/popup';
+import { cn } from '@/lib/utils';
 
 const images = [
   { src: '/images/notify-earrings.png', alt: 'Antique Gold Earrings' },
@@ -14,6 +20,82 @@ const images = [
 
 export function Notify() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [popup, setPopup] = useState<{ isOpen: boolean; message: string; variant: 'success' | 'error' | 'info' | 'warning' }>({
+    isOpen: false,
+    message: '',
+    variant: 'success',
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Memoize onClose to prevent timer resets in Popup component
+  const handleClose = React.useCallback(() => {
+    setPopup(prev => ({ ...prev, isOpen: false }));
+  }, []);
+
+  // Form validation schema
+  const schema = z.object({
+    name: z.string().optional(),
+    email: z.string().email({ message: "Please enter a valid email address" }),
+  });
+
+  type FormData = z.infer<typeof schema>;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/notify`, {
+        email: data.email,
+      }, {
+        validateStatus: () => true
+      });
+
+      const result = response.data;
+
+      if (response.status === 409) {
+        setPopup({
+          isOpen: true,
+          message: "You are already on our list! We'll notify you soon.",
+          variant: 'info',
+        });
+        reset();
+        return;
+      }
+
+      if (response.status < 200 || response.status >= 300) {
+        throw new Error(result.error || 'Something went wrong');
+      }
+
+      setPopup({
+        isOpen: true,
+        message: "You've been added to our exclusive list. We'll notify you soon!",
+        variant: 'success',
+      });
+      reset();
+    } catch (error: any) {
+      let errorMessage = error.message || 'Failed to register. Please try again.';
+
+      if (errorMessage === 'Network Error' || errorMessage === 'Failed to fetch') {
+        errorMessage = "Unable to connect to the server. Please try again later.";
+      }
+
+      setPopup({
+        isOpen: true,
+        message: errorMessage,
+        variant: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,6 +107,13 @@ export function Notify() {
 
   return (
     <section className="bg-veda-charcoal text-white overflow-hidden relative">
+      <Popup
+        isOpen={popup.isOpen}
+        onClose={handleClose}
+        message={popup.message}
+        variant={popup.variant}
+      />
+
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-veda-gold/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-veda-gold/5 rounded-full blur-[120px] pointer-events-none" />
@@ -48,9 +137,10 @@ export function Notify() {
                 Also there's a special heritage token for the exclusive club of first 100 customers.
               </p>
 
-              <form className="space-y-6 pt-4 max-w-sm">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pt-4 max-w-sm">
                 <div className="space-y-1">
                   <Input
+                    {...register('name')}
                     type="text"
                     placeholder="YOUR NAME"
                     className="border-0 border-b border-white/20 rounded-none px-0 py-4 bg-transparent text-veda-beige placeholder:text-white/30 focus-visible:ring-0 focus-visible:border-veda-gold transition-colors font-montserrat tracking-wide h-auto text-base"
@@ -58,18 +148,31 @@ export function Notify() {
                 </div>
                 <div className="space-y-1">
                   <Input
+                    {...register('email')}
                     type="email"
                     placeholder="EMAIL ADDRESS"
-                    className="border-0 border-b border-white/20 rounded-none px-0 py-4 bg-transparent text-veda-beige placeholder:text-white/30 focus-visible:ring-0 focus-visible:border-veda-gold transition-colors font-montserrat tracking-wide h-auto text-base"
+                    className={cn(
+                      "border-0 border-b rounded-none px-0 py-4 bg-transparent text-veda-beige placeholder:text-white/30 focus-visible:ring-0 transition-colors font-montserrat tracking-wide h-auto text-base",
+                      errors.email
+                        ? "border-red-400 focus-visible:border-red-400"
+                        : "border-white/20 focus-visible:border-veda-gold"
+                    )}
                   />
+                  {errors.email && (
+                    <p className="text-red-400 text-xs font-montserrat mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="pt-6">
                   <Button
+                    type="submit"
+                    disabled={isLoading}
                     variant="ghost"
-                    className="w-full bg-veda-gold hover:bg-veda-gold-dark text-veda-charcoal hover:text-white font-cinzel tracking-widest py-6 rounded-none text-base transition-all duration-500 ease-out border border-veda-gold"
+                    className="w-full bg-veda-gold hover:bg-veda-gold-dark text-veda-charcoal hover:text-white font-cinzel tracking-widest py-6 rounded-none text-base transition-all duration-500 ease-out border border-veda-gold disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    NOTIFY ME
+                    {isLoading ? 'SENDING...' : 'NOTIFY ME'}
                   </Button>
                 </div>
               </form>
@@ -110,11 +213,8 @@ export function Notify() {
         </div>
 
         {/* Footer */}
-
-        {/* Footer */}
         <Footer />
       </div>
     </section>
   );
 }
-
