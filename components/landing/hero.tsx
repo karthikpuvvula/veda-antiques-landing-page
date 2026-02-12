@@ -38,7 +38,7 @@ export function Hero() {
         {/* Logo Area */}
         <div className="mb-0 md:mb-0">
           <Image
-            src="/images/logo.webp"
+            src="/images/logo.png"
             alt="Veda Antiques Logo"
             width={192}
             height={192}
