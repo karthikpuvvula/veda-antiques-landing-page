@@ -14,7 +14,7 @@ const treasures = [
   },
   {
     id: '02',
-    title: 'Oxidized Silver',
+    title: 'Oxidized Silver Jewelry',
     description: 'Rustic, tribal elegance with intricate silver craftsmanship.',
     image: '/images/oxidized-silver-earrings.png',
   },

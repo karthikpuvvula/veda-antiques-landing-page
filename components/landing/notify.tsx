@@ -170,7 +170,7 @@ export function Notify() {
                     type="submit"
                     disabled={isLoading}
                     variant="ghost"
-                    className="w-full bg-veda-gold hover:bg-veda-gold-dark text-veda-charcoal hover:text-white font-cinzel tracking-widest py-6 rounded-none text-base transition-all duration-500 ease-out border border-veda-gold disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full bg-veda-gold hover:bg-veda-gold-dark text-veda-charcoal hover:text-white font-cinzel tracking-widest py-6 rounded-none text-base transition-all duration-500 ease-out border border-veda-gold disabled:opacity-70 cursor-pointer disabled:cursor-not-allowed"
                   >
                     {isLoading ? 'SENDING...' : 'NOTIFY ME'}
                   </Button>

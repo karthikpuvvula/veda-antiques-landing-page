@@ -78,16 +78,18 @@ export function Hero() {
             Be the first to know when we unveil these timeless treasures.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="https://www.instagram.com/veda.antiques?igsh=M2R6d2Rjb2FqeG82"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit us on Instagram"
-              className="group relative flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] p-3 transition-transform duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
-            >
-              <Instagram className="h-8 w-8 text-white" />
-            </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center cursor-pointer">
+            <div className="animate-pulse-scale">
+              <a
+                href="https://www.instagram.com/veda.antiques?igsh=M2R6d2Rjb2FqeG82"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit us on Instagram"
+                className="group relative flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] p-3 transition-transform duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+              >
+                <Instagram className="h-8 w-8 text-white" />
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>

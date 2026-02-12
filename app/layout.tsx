@@ -22,8 +22,16 @@ const cinzel = Cinzel_Decorative({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://vedaantiques.com'),
   title: 'Veda Antiques | The Soul of Tradition',
   description: 'Discover the soul of tradition with Veda Antiques. Explore our curated collection of exquisite antique jewelry, from temple designs to oxidized silver and daily wear.',
+  openGraph: {
+    title: 'Veda Antiques | The Soul of Tradition',
+    description: 'Discover the soul of tradition with Veda Antiques. Explore our curated collection of exquisite antique jewelry, from temple designs to oxidized silver and daily wear.',
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://vedaantiques.com',
+  },
 }
 
 export default function RootLayout({
