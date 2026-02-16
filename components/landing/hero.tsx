@@ -68,14 +68,13 @@ export function Hero() {
           </h2>
 
           <p className="flex justify-center w-full mb-10 text-sm md:text-lg uppercase text-veda-gold/80 font-montserrat tracking-[0.5em]">
-            {"COMING SOON".split("").map((char, index) => (
+            {"WEBSITE COMING SOON".split("").map((char, index) => (
               <span key={index}>{char === " " ? "\u00A0" : char}</span>
             ))}
           </p>
 
           <p className="mb-10 max-w-xl mx-auto text-base text-white/70 md:text-lg font-light leading-relaxed font-montserrat">
-            Veda Antiques is preparing an exclusive collection of heritage artifacts.
-            Be the first to know when we unveil these timeless treasures.
+            Our online jewellery store is launching soon. Meanwhile checkout our latest collections on instagram.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center cursor-pointer">

@@ -174,6 +174,9 @@ export function Notify() {
                   >
                     {isLoading ? 'SENDING...' : 'NOTIFY ME'}
                   </Button>
+                  <p className="mt-4 text-center text-sm font-montserrat text-white/60">
+                    or contact us over email at <a href="mailto:contact@vedaantiques.com" className="text-veda-gold hover:text-white transition-colors">contact@vedaantiques.com</a>
+                  </p>
                 </div>
               </form>
             </div>
