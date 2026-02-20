@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { clsx } from 'clsx';
+import { cn } from '@/lib/utils';
 
 const treasures = [
   {
@@ -55,7 +55,7 @@ export function About() {
     },
     exit: (direction: number) => ({
       y: direction < 0 ? "100%" : "-100%",
-      opacity: 0, // Fade out to avoid overlap clutter
+      opacity: 0,
     }),
   };
 
@@ -88,6 +88,7 @@ export function About() {
                       alt={treasures[activeIndex].title}
                       fill
                       className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       priority
                     />
                   </div>
@@ -123,7 +124,9 @@ export function About() {
                     alt={item.title}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     priority={index === 0}
+                    loading={index === 0 ? "eager" : "lazy"}
                   />
                 </motion.div>
               ))}
@@ -137,31 +140,22 @@ export function About() {
 
               <div className="space-y-12">
                 {treasures.map((item, index) => (
-                  <motion.div
+                  <div
                     key={item.id}
-                    className={clsx(
-                      "border-b border-veda-charcoal/20 pb-12 cursor-pointer",
+                    className={cn(
+                      "border-b border-veda-charcoal/20 pb-12",
                       activeIndex === index ? "opacity-100" : "opacity-40"
                     )}
-                    animate={{
-                      scale: activeIndex === index ? 1.05 : 1,
-                      x: activeIndex === index ? 20 : 0,
-                      filter: activeIndex === index ? "blur(0px)" : "blur(1px)",
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    onClick={() => {
-                      // Logic if needed
-                    }}
                   >
                     <div className="flex items-start gap-8">
-                      <span className={clsx(
+                      <span className={cn(
                         "font-serif text-5xl transition-colors duration-500",
                         activeIndex === index ? "text-veda-gold-dark" : "text-veda-charcoal/20"
                       )}>
                         {item.id}
                       </span>
                       <div>
-                        <h3 className={clsx(
+                        <h3 className={cn(
                           "text-3xl font-serif mb-2 transition-colors duration-500",
                           activeIndex === index ? "text-veda-charcoal" : "text-veda-charcoal/40"
                         )}>
@@ -172,7 +166,7 @@ export function About() {
                         </p>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>

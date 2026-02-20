@@ -13,11 +13,6 @@
   --color-veda-gray: #888888;
 }
 
-* {
-  /* outline: 1px solid red; */
-}
-
-/* Custom utilities if needed, but Tailwind v4 handles most via theme */
 body {
   font-family: var(--font-sans);
   background-color: var(--color-veda-beige);
@@ -33,24 +28,8 @@ h6 {
   font-family: var(--font-serif);
 }
 
-.font-cinzel {
-  font-family: var(--font-cinzel), cursive;
-}
-
 .font-montserrat {
   font-family: var(--font-montserrat), sans-serif;
-}
-
-.text-gold {
-  color: var(--color-veda-gold);
-}
-
-.bg-gold {
-  background-color: var(--color-veda-gold);
-}
-
-.bg-charcoal {
-  background-color: var(--color-veda-charcoal);
 }
 
 @keyframes bounce-slow {

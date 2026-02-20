@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function Gallery() {
   const images = [
     'https://placehold.co/600x600/e0e0e0/333333?text=Lifestyle+1',

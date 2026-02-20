@@ -1,13 +1,18 @@
-
-import React from "react";
+import type { Metadata } from "next";
 import { SimpleNavbar } from "@/components/landing/simple-navbar";
 import { Footer } from "@/components/landing/footer";
+
+export const metadata: Metadata = {
+    title: "Privacy Policy | Veda Antiques",
+    description:
+        "Learn how Veda Antiques collects, uses, and protects your personal information. Read our full privacy policy.",
+};
 
 export default function PrivacyPolicy() {
     return (
         <div className="min-h-screen bg-veda-beige text-veda-charcoal flex flex-col">
             <SimpleNavbar />
-            <div className="pt-32 pb-16 px-4 md:px-8 lg:px-16 flex-grow">
+            <main className="pt-32 pb-16 px-4 md:px-8 lg:px-16 grow">
                 <div className="max-w-4xl mx-auto space-y-8">
                     <header className="text-center space-y-4 mb-12">
                         <h1 className="text-4xl md:text-5xl font-cinzel text-veda-gold-dark">
@@ -79,15 +84,15 @@ export default function PrivacyPolicy() {
                             Veda Antiques<br />
                             Mauranagar, Khammam<br />
                             Telangana, India<br />
-                            Email: <a href="mailto:support@vedaantiques.com" className="text-blue-600 underline">support@vedaantiques.com</a>
+                            Email: <a href="mailto:hello@vedaantiques.com" className="text-blue-600 underline">hello@vedaantiques.com</a>
                         </address>
                     </section>
 
                     <div className="pt-8 text-center text-sm font-sans text-veda-charcoal/60">
-                        <p>Last updated: {new Date().toLocaleDateString()}</p>
+                        <p>Last updated: February 19, 2026</p>
                     </div>
                 </div>
-            </div>
+            </main>
             <div className="pb-8 px-4 md:px-8 lg:px-16">
                 <Footer variant="light" />
             </div>

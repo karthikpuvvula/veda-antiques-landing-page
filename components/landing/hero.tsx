@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { Button } from '../ui/button';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { Instagram } from 'lucide-react';
 
 
 export function Hero() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -21,15 +20,21 @@ export function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 bg-gray-900">
         <motion.div
-          className="absolute inset-0 bg-cover bg-center opacity-70"
-          style={{
-            backgroundImage: 'url(/images/hero-bg.jpg)',
-            y
-          }}
-        />
+          className="absolute inset-0 opacity-70"
+          style={{ y }}
+        >
+          <Image
+            src="/images/hero-bg.jpg"
+            alt="Antique jewelry background"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </motion.div>
         {/* Gradient Overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/30" />
       </div>
 
       {/* Content */}
@@ -38,13 +43,12 @@ export function Hero() {
         {/* Logo Area */}
         <div className="mb-0 md:mb-0">
           <Image
-            src="/images/logo.png"
+            src="/images/logo.webp"
             alt="Veda Antiques Logo"
             width={192}
             height={192}
             className="w-32 md:w-48 h-auto drop-shadow-xl hover:scale-105 transition-transform duration-500"
             priority
-            unoptimized
           />
         </div>
 
@@ -77,14 +81,14 @@ export function Hero() {
             Our online jewellery store is launching soon. Meanwhile checkout our latest collections on instagram.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center cursor-pointer">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <div className="animate-pulse-scale">
               <a
                 href="https://www.instagram.com/veda.antiques?igsh=M2R6d2Rjb2FqeG82"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit us on Instagram"
-                className="group relative flex items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] p-3 transition-transform duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+                className="group relative flex items-center justify-center rounded-full bg-linear-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] p-3 transition-transform duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
               >
                 <Instagram className="h-8 w-8 text-white" />
               </a>

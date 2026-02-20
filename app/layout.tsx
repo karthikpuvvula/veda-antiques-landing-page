@@ -31,6 +31,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://vedaantiques.com',
+    siteName: 'Veda Antiques',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Veda Antiques | The Soul of Tradition',
+    description: 'Discover the soul of tradition with Veda Antiques. Explore our curated collection of exquisite antique jewelry, from temple designs to oxidized silver and daily wear.',
+  },
+  alternates: {
+    canonical: '/',
   },
 }
 
